@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import {useDispatch, useSelector }from 'react-redux';
 import {selectCount, increment, decrement} from './features/counterSlice';
 import {getTodos, selectTodo} from './features/todoSlice';
-
+import AddTodo from './components/AddTodo';
 
 const App = () => {
 
@@ -41,7 +41,7 @@ useEffect(() => {
         <p key={index}>{todo.name}</p>
       ))}
       {todos.length === 0 && <div>... loading</div>}
-     
+     <AddTodo />
     </div>
   );
 }
