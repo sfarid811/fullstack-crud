@@ -1,18 +1,23 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
-const config = require('dotenv').config();
+require('dotenv').config();
 const connectDB = require('./config/database');
-
+const todoRoutes = require('./routes/todos');
 
 //database connection
 
 connectDB();
-
+app.use(express.json());
+app.use(cors());
 
 app.get('/', function(req, res) {
     res.send('hello world');
-    console.log(process.env.MONGODB_URI, 'test')
+  
   });
+
+app.use('/api/todos', todoRoutes);
 
   
 const PORT = process.env.PORT || 5000;
