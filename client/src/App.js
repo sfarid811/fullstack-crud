@@ -13,9 +13,9 @@ const App = () => {
 
   const todos  = useSelector(selectTodo);
   
-  console.log(todos);
+  console.log(todos, 'saad');
 
- 
+
 
 useEffect(() => {
   dispatch(getTodos());
@@ -36,6 +36,10 @@ useEffect(() => {
       <button onClick={decrementCounter}> decrement</button>
       <p>{count}</p>
       <button  onClick={incrementCounter}> increment </button>
+
+      {todos.map((todo, index) => (
+        <p key={index}>{todo.name}</p>
+      ))}
       {todos.length === 0 && <div>... loading</div>}
      
     </div>

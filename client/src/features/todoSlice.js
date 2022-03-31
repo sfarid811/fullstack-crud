@@ -3,17 +3,20 @@ import axios from "axios";
 
 
 const initialState = {
-    todos: [],
-    getTodosStatus: "",
-    getTodosError: "",
+  todos : [],
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message : ''
   };
+
 
   export const getTodos = createAsyncThunk(
     "todos/getTodos",
     async (_, { rejectWithValue }) => {
       try {
-        const response = await axios.get("http://localhost:8000/api/todos");
-        console.log(response.data);
+        const response = await axios.get(process.env.REACT_APP_API);
+     
         return response.data;
       } catch (error) {
         console.log(error);
@@ -22,39 +25,28 @@ const initialState = {
     }
   );
 
- 
-
-
 
 export const todoSlice = createSlice({
-    name: "todos",
-    initialState,
-    reducers: {},
-    [getTodos.pending]: (state, action) => {
-        return {
-          ...state,
-          getTodosStatus: "pending",
-          getTodosError: "",
-        };
-      },
-      [getTodos.fulfilled]: (state, action) => {
-        return {
-          ...state,
-          todos: action.payload,
-          getTodosStatus: "success",
-          getTodosError: "",
-         
-        };
-      },
-      [getTodos.rejected]: (state, action) => {
-        return {
-          ...state,
-          getTodosStatus: "rejected",
-          getTodosError: action.payload,
-         
-        };
-      },
-
+  name: 'todos',
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getTodos.pending]: (state) => {
+      state.isLoading = true
+     
+    },
+    [getTodos.fulfilled]: (state, { payload }) => {
+      state.todos = payload;
+      state.isLoading = false;
+      state.isSuccess = true;
+   
+    },
+    [getTodos.rejected]: (state, { payload}) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = payload
+    },
+  },
 })
 
 
