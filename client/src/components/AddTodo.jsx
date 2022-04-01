@@ -6,38 +6,20 @@ const AddTodo = () => {
 
   const dispatch = useDispatch();
 
-  const [todo, setTodo] = useState({
-    name: "",
-    isComplete: false,
-  });
+  const [name, setName] = useState("")
 
   const handleSubmit = (e) => {
-
-  
-    e.preventDefault();
-
-    if(todo.name === "" || todo.name.length < 5) {
-      alert("Please fill the field")
-    } else {
-      const newTodo = {
-        ...todo,
-        date: new Date(),
-      };
-  
-        dispatch(createTodo(newTodo));
-      
-     
-    }
-    setTodo({
-      task: "",
-      isComplete: false,
-    });
+    e.preventDefault()
+    if(name == "") return;
+    dispatch(createTodo({ name }))
+    setName('')
+   
   };
 
 
   return (
     <div className="contactez-nous">
-    <h1>Contactez-nous</h1>
+    <h1 className="text-center text-2xl">Contactez-nous</h1>
     <p>This form allows you to post a new todo!</p>
     <form onSubmit={handleSubmit}>
     <div>
@@ -45,8 +27,8 @@ const AddTodo = () => {
     <input type="text" 
     id="nom"  
     placeholder="Todo"
-    value={todo.name}
-    onChange={(e) => setTodo({ ...todo, name: e.target.value })}
+    value={name}
+    onChange={(e) => setName(e.target.value)}
     />
     </div>
    

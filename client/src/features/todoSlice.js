@@ -12,10 +12,10 @@ const initialState = {
 
 
   export const getTodos = createAsyncThunk(
-    "todos/getTodos",
+    "todos/getAll",
     async (_, { rejectWithValue }) => {
       try {
-        const response = await axios.get(process.env.REACT_APP_API);
+        const response = await axios.get("http://localhost:8000/api/todos");
      
         return response.data;
       } catch (error) {
@@ -26,9 +26,8 @@ const initialState = {
   );
 
 
-
   export const createTodo = createAsyncThunk(
-    "todos/todosAdd",
+    "todos/create",
     async (todo, { rejectWithValue }) => {
       try {
         const response = await axios.post("http://localhost:8000/api/todos/create", todo);
@@ -40,43 +39,75 @@ const initialState = {
     }
   );
 
+
+  export const deleteTodo = createAsyncThunk('todos/delete', async (id, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+        return await axios.delete('http://localhost:8000/api/todos/' + id);
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+
+
 export const todoSlice = createSlice({
   name: 'todos',
   initialState,
-  reducers: {},
-  extraReducers: {
-    [getTodos.pending]: (state) => {
-      state.isLoading = true;
-     
-    },
-    [getTodos.fulfilled]: (state, { payload }) => {
-      state.todos = payload;
-      state.isLoading = false;
-      state.isSuccess = true;
-    },
-    [getTodos.rejected]: (state, { payload}) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = payload;
-    },
-    [createTodo.pending] : (state) => {
-      state.isLoading = true
-    }, 
-    [createTodo.fulfilled]: (state, { payload }) => {
-      state.isLoading = false
-      state.isSuccess = true
-      state.todos.push(payload)
-    },
-    [createTodo.failed]: (state, { payload }) => {
+  reducers: {
+    reset: (state) => initialState,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createTodo.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createTodo.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.todos.push(action.payload)
+      })
+      .addCase(createTodo.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.message = payload
-    }
-    
+        state.message = action.payload
+      })
+      .addCase(getTodos.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getTodos.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.todos = action.payload
+      })
+      .addCase(getTodos.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(deleteTodo.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        const index = state.todos.findIndex(
+          (todo) => todo._id === action.payload.todo
+        );
+        state.todos.splice(index, 1);
+        
+      })
+      .addCase(deleteTodo.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 
 
+
+export const { reset } = todoSlice.actions
 export default todoSlice.reducer;
 
-export const selectTodo = (state) => state.todo.todos;
+export const selectTodo = (state) => state.todo;
