@@ -34,19 +34,20 @@ const createTodo = async (req, res) => {
       }
 }
 
+
+
 const deleteTodo = async (req, res) => {
-  const todo = await Todo.findById(req.params.id);
+  const todo = await Todo.findById(req.params.id)
 
-    if(todo) {
-      await todo.remove();
-      res.status(200).json({message : 'Todo deleted successfully!'})
-    } else {
-      res.status(404).json({
-        error: "Todo not found !"
-    })
-    }
+  if (!todo) {
+    res.status(400)
+    throw new Error('Todo not found')
+  }
 
-}
+  await todo.remove()
+
+  res.status(200).json({ id: req.params.id })
+};
 
 const updateTodo = async (req, res) => {
   const schema = Joi.object({
