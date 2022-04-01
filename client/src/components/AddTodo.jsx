@@ -8,14 +8,22 @@ const AddTodo = () => {
 
   const [name, setName] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if(name == "") return;
-    dispatch(createTodo({ name }))
-    setName('')
-   
-  };
 
+  const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if(name.trim().length === 0)
+		{
+			alert("Enter a task before adding !!");
+      setName('');
+			return;
+		}
+
+    dispatch(createTodo({ name }))
+
+    setName('')
+
+	};
 
   return (
     <div className="contactez-nous">

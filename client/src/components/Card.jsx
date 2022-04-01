@@ -32,8 +32,6 @@ const Card = () => {
       return <Spinner />
     }
   
-
-
   return (
       <>
         <div className="mx-auto container py-20 px-6">

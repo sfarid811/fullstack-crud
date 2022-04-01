@@ -92,7 +92,7 @@ export const todoSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         const index = state.todos.findIndex(
-          (todo) => todo._id === action.payload.todo
+          (todo) => todo._id === action.payload
         );
         state.todos.splice(index, 1);
         
