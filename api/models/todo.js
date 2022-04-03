@@ -4,14 +4,15 @@ const todoSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 3,
-    maxlength: 200,
+    minlength: 5,
+    maxlength: 20,
   },
-  isComplete: Boolean,
-  date: {
-    type: Date,
-    default: new Date(),
+  description: {
+    type: String,
+    required: true,
+    minlength: 20,
+    maxlength: 150,
   },
-});
+} ,{timestamps: true});
 
 module.exports = mongoose.model('Todo', todoSchema);

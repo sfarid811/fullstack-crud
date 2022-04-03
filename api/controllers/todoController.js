@@ -14,17 +14,16 @@ const createTodo = async (req, res) => {
     try {
         const schema = Joi.object({
           name: Joi.string().min(3).max(300).required(),
-          isComplete: Joi.boolean(),
-          date: Joi.date(),
+          description: Joi.string().min(20).max(300).required(),
         });
     
         const { error } = schema.validate(req.body);
     
         if (error) return res.status(400).send(error.details[0].message);
     
-        const { name, author, isComplete, date, uid } = req.body;
+        const { name, description } = req.body;
     
-        let todo = new Todo({ name, author, isComplete, date, uid });
+        let todo = new Todo({ name, description });
     
         todo = await todo.save();
         res.send(todo);
@@ -52,8 +51,7 @@ const deleteTodo = async (req, res) => {
 const updateTodo = async (req, res) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(300).required(),
-    isComplete: Joi.boolean(),
-    date: Joi.date(),
+    description: Joi.string().min(20).max(300).required(),
   });
 
   const { error } = schema.validate(req.body);
@@ -64,16 +62,20 @@ const updateTodo = async (req, res) => {
 
   if (!todo) return res.status(404).send("Todo not found...");
 
-  const { name, author, isComplete, date, uid } = req.body;
+  const { name, description} = req.body;
 
   const updatedTodo = await Todo.findByIdAndUpdate(
     req.params.id,
-    { name, author, isComplete, date, uid },
+    { name, description },
     { new: true }
   );
 
   res.send(updatedTodo);
+
 }
+
+
+
 
 module.exports = {
     getTodos,
