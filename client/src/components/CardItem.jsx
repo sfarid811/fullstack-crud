@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { deleteTodo } from "../features/todoSlice";
 import { useDispatch } from "react-redux";
-import moment from "moment";
+import EditTodo from './EditTodo';
 
 const CardItem = ({ todo }) => {
+
+  const [showEdit, setShowEdit] = useState(false);
   const dispatch = useDispatch();
  
   return (
@@ -12,22 +14,22 @@ const CardItem = ({ todo }) => {
         <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4">
           <div>
             <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">
-            {todo.name}
+            {todo.name.charAt(0).toUpperCase() + todo.name.slice(1)}
             </h4>
             <p className="text-gray-800 dark:text-gray-100 text-sm">
-              Our interior design experts work with you to create the space that
-              you have been dreaming about.
+             {todo.description}
             </p>
           </div>
+              {showEdit ? <EditTodo setShowEdit={setShowEdit} todo={todo} /> : null}
           <div>
             <div className="flex items-center justify-between text-gray-800 dark:text-gray-100">
-          
-              <p className="text-sm">{moment(todo.date).format("MMM Do YY") }</p>
+              <p className="text-sm"> {new Date(todo.createdAt).toLocaleString('en-US')}</p>
             <div className="flex space-x-4">
             <button
-                className="w-8 h-8 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-black"
-                aria-label="edit note"
-                role="button"
+              onClick={() => setShowEdit(true)}
+              className="w-8 h-8 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-black"
+              aria-label="edit note"
+              role="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +58,7 @@ const CardItem = ({ todo }) => {
             </div>
           </div>
         </div>
+        
       </div>
     </>
   );

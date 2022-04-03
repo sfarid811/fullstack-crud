@@ -8,11 +8,9 @@ import {
 const App = () => {
 
 
-
-  
   return (
     <div>
-      <AddTodo />
+      {/* <AddTodo /> */}
      <Card />
 
     </div>

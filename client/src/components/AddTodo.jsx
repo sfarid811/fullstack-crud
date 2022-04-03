@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import {createTodo} from '../features/todoSlice';
 
 const AddTodo = () => {
 
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
 
   const handleSubmit = (e) => {
@@ -16,12 +17,13 @@ const AddTodo = () => {
 		{
 			alert("Enter a task before adding !!");
       setName('');
+      setDescription('');
 			return;
 		}
 
-    dispatch(createTodo({ name }))
-
-    setName('')
+    dispatch(createTodo({name, description}))
+    setName('');
+    setDescription('');
 
 	};
 
@@ -31,12 +33,21 @@ const AddTodo = () => {
     <p>This form allows you to post a new todo!</p>
     <form onSubmit={handleSubmit}>
     <div>
-    <label htmlFor="nom">Votre nom</label>
+    <label htmlFor="nom">Name</label>
     <input type="text" 
     id="nom"  
     placeholder="Todo"
     value={name}
     onChange={(e) => setName(e.target.value)}
+    />
+    </div>
+    <div>
+    <label htmlFor="nom">Description</label>
+    <input type="text" 
+    id="nom"  
+    placeholder="Description"
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
     />
     </div>
    
