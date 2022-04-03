@@ -1,20 +1,11 @@
-import AddTodo from './components/AddTodo';
-import Card from './components/Card';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import Card from "./components/Card";
+
 const App = () => {
-
-
   return (
     <div>
-      {/* <AddTodo /> */}
-     <Card />
-
+      <Card />
     </div>
   );
-}
+};
 
-export default App
+export default App;

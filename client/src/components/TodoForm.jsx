@@ -1,38 +1,30 @@
-import React, {useState} from "react";
-import { useDispatch } from 'react-redux';
-import {createTodo} from '../features/todoSlice';
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createTodo } from "../features/todoSlice";
 
 const TodoForm = ({ setShowModal }) => {
-
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-
   const handleSubmit = (e) => {
-		e.preventDefault();
+    e.preventDefault();
 
-		if(name.trim().length === 0)
-		{
-			alert("Enter a task before adding !!");
-      setName('');
-      setDescription('');
-			return;
-		}
+    if (name.trim().length === 0) {
+      alert("Enter a task before adding !!");
+      setName("");
+      setDescription("");
+      return;
+    }
 
-    dispatch(createTodo({name, description}))
-    setName('');
-    setDescription('');
+    dispatch(createTodo({ name, description }));
+    setName("");
+    setDescription("");
     setShowModal(false);
-	};
-
-
-
+  };
 
   return (
     <div className="fixed z-10 inset-0">
-     
       <div className="flex items-center justify-center min-h-screen">
         <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl">
           <div className="max-w-md mx-auto space-y-6">
@@ -63,24 +55,22 @@ const TodoForm = ({ setShowModal }) => {
               />
 
               <div className="flex space-x-4">
-              <input
-                type="submit"
-                className="py-3 px-6 my-2 bg-gray-700 text-white font-medium rounded hover:bg-gray-600 cursor-pointer ease-in-out duration-300"
-                value="Submit"
-              />
-               <input
-                type="button"
-                className="py-3 px-6 my-2 bg-emerald-500 text-white font-medium rounded  cursor-pointer ease-in-out duration-300"
-                value="Close"
-                onClick={() => setShowModal(false)}
-              />
+                <input
+                  type="submit"
+                  className="py-3 px-6 my-2 bg-gray-700 text-white font-medium rounded hover:bg-gray-600 cursor-pointer ease-in-out duration-300"
+                  value="Submit"
+                />
+                <input
+                  type="button"
+                  className="py-3 px-6 my-2 bg-emerald-500 text-white font-medium rounded  cursor-pointer ease-in-out duration-300"
+                  value="Close"
+                  onClick={() => setShowModal(false)}
+                />
               </div>
             </form>
           </div>
         </div>
       </div>
-    
-      
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTodos, selectTodo, reset } from "../features/todoSlice";
 import Spinner from "./Spinner";
-import TodoForm from './TodoForm';
+import TodoForm from "./TodoForm";
 
 const Card = () => {
   const [showModal, setShowModal] = useState(false);
@@ -37,9 +37,7 @@ const Card = () => {
             todos.map((todo, index) => <CardItem key={index} todo={todo} />)}
         </div>
         <div className="fixed z-30 bottom-6 right-10 bg-gray-700 p-2 rounded-full hover:bg-gray-600 cursor-pointer">
-          <span className="text-[#fff]"
-            onClick={() => setShowModal(true)}
-          >
+          <span className="text-[#fff]" onClick={() => setShowModal(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
