@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTodo } from "../features/todoSlice";
 
+
 const TodoForm = ({ setShowModal }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -58,12 +59,12 @@ const TodoForm = ({ setShowModal }) => {
                 <input
                   type="submit"
                   className="py-3 px-6 my-2 bg-gray-700 text-white font-medium rounded hover:bg-gray-600 cursor-pointer ease-in-out duration-300"
-                  value="Submit"
+                  value="Add"
                 />
                 <input
                   type="button"
                   className="py-3 px-6 my-2 bg-emerald-500 text-white font-medium rounded  cursor-pointer ease-in-out duration-300"
-                  value="Close"
+                  value="Cancel"
                   onClick={() => setShowModal(false)}
                 />
               </div>

@@ -50,7 +50,7 @@ const EditTodo = ({ setShowEdit, todo }) => {
                 <input
                   type="submit"
                   className="py-3 px-6 my-2 bg-gray-700 text-white font-medium rounded hover:bg-gray-600 cursor-pointer ease-in-out duration-300"
-                  value="Submit"
+                  value="Update"
                 />
                 <input
                   type="submit"
