@@ -1,12 +1,19 @@
 import Card from "./components/Card";
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 const App = () => {
  
   return (
-    <div>
-      
+    <>
+    <ToastContainer />
+    <div className="App">
       <Card />
     </div>
+  </>
+
   );
 };
 

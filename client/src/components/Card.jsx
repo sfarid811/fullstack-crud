@@ -15,7 +15,7 @@ const Card = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      ///console.log(message);
     }
 
     dispatch(getTodos());

@@ -5,6 +5,6 @@ import darkReducer from "./features/todoSlice";
 export const store = configureStore({
   reducer: {
     todo: todoReducer,
-    dark: darkReducer
+    // dark: darkReducer
   },
 });

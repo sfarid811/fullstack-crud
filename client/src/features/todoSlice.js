@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -33,7 +34,7 @@ export const createTodo = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       return rejectWithValue(error.response?.data);
     }
   }
@@ -87,11 +88,29 @@ export const todoSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.todos.push(action.payload);
+        toast.success("ticket created", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
       })
       .addCase(createTodo.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        toast.error(action.error.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
       })
       .addCase(getTodos.pending, (state) => {
         state.isLoading = true;
@@ -116,7 +135,17 @@ export const todoSlice = createSlice({
           (todo) => todo._id === action.payload
         );
         state.todos.splice(index, 1);
+        toast.success('ticket deleted successfully!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
       })
+     
       .addCase(deleteTodo.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
@@ -132,6 +161,15 @@ export const todoSlice = createSlice({
           todo._id === action.payload._id ? action.payload : todo
         );
         state.todos = updateTodo;
+        toast.success("ticket information updated", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
       })
       .addCase(updateTodo.rejected, (state, action) => {
         state.isLoading = false;
