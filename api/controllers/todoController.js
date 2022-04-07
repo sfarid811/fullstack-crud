@@ -28,11 +28,10 @@ const createTodo = async (req, res) => {
         todo = await todo.save();
         res.send(todo);
       } catch (error) {
-        console.log(error.message);
+       
         res.status(500).send(error.message);
       }
 }
-
 
 
 const deleteTodo = async (req, res) => {
@@ -73,9 +72,6 @@ const updateTodo = async (req, res) => {
   res.send(updatedTodo);
 
 }
-
-
-
 
 module.exports = {
     getTodos,

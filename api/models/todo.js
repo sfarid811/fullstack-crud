@@ -5,13 +5,13 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 5,
-    maxlength: 20,
+    maxlength: 100,
   },
   description: {
     type: String,
     required: true,
     minlength: 20,
-    maxlength: 150,
+    maxlength: 300,
   },
 } ,{timestamps: true});
 
