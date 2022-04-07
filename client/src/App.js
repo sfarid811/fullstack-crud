@@ -10,6 +10,7 @@ const App = () => {
     <>
     <ToastContainer />
     <div className="App">
+    mikou
       <Card />
     </div>
   </>
