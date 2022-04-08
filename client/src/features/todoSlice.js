@@ -1,6 +1,7 @@
-import { toast } from "react-toastify";
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 const initialState = {
   todos: [],
@@ -88,28 +89,19 @@ export const todoSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.todos.push(action.payload);
-        toast.success("ticket created", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
+        toast.success("Ticket created Successfully", {
+          duration: 4000,
+          position: 'top-right',
+        });
+       
       })
       .addCase(createTodo.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         toast.error(action.error.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+          duration: 4000,
+          position: 'top-right',
         })
       })
       .addCase(getTodos.pending, (state) => {
@@ -136,13 +128,8 @@ export const todoSlice = createSlice({
         );
         state.todos.splice(index, 1);
         toast.success('ticket deleted successfully!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+          duration: 4000,
+          position: 'top-right',
         })
       })
      
@@ -162,13 +149,8 @@ export const todoSlice = createSlice({
         );
         state.todos = updateTodo;
         toast.success("ticket information updated", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+          duration: 4000,
+          position: 'top-right',
         })
       })
       .addCase(updateTodo.rejected, (state, action) => {

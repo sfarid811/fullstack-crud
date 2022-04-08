@@ -1,6 +1,5 @@
 import Card from "./components/Card";
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -8,9 +7,9 @@ const App = () => {
  
   return (
     <>
-    <ToastContainer />
+    <Toaster />
     <div className="App">
-    mikou
+    {/* mikou */}
       <Card />
     </div>
   </>
