@@ -21,10 +21,9 @@ const EditTodo = ({ setShowEdit, todo }) => {
         <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white shadow-xl">
           <div className="max-w-md mx-auto space-y-6">
             <form onSubmit={updateForm}>
-              <h2 className="text-2xl font-bold ">Submit your task</h2>
+              <h2 className="text-2xl font-bold ">Update your task</h2>
               <p className="my-4 opacity-70">
-                Adipisicing elit. Quibusdam magnam sed ipsam deleniti debitis
-                laboriosam praesentium dolorum doloremque beata.
+              Updating ticket process ...
               </p>
               <hr className="my-6" />
               <label className="uppercase text-sm font-bold opacity-70">

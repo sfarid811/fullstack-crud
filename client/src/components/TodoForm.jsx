@@ -31,10 +31,9 @@ const TodoForm = ({ setShowModal }) => {
         <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white shadow-xl">
           <div className="max-w-md mx-auto space-y-6">
             <form onSubmit={handleSubmit}>
-              <h2 className="text-2xl font-bold">Submit your task</h2>
+              <h2 className="text-2xl font-bold">Add your task</h2>
               <p className="my-4 opacity-70">
-                Adipisicing elit. Quibusdam magnam sed ipsam deleniti debitis
-                laboriosam praesentium dolorum doloremque beata.
+              Please fill in the fields below !
               </p>
               <hr className="my-6" />
               <label className="uppercase text-sm font-bold opacity-70">
@@ -44,6 +43,7 @@ const TodoForm = ({ setShowModal }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
+                placeholder="Give your ticket a name"
                 className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:outline-none"
               />
               <label className="uppercase text-sm font-bold opacity-70">
@@ -53,6 +53,7 @@ const TodoForm = ({ setShowModal }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
+                placeholder="Give your ticket a description"
                 className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded
                 border-slate-200 focus:outline-none
                 "
