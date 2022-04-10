@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTodos, selectTodo, reset } from "../features/todoSlice";
 import Spinner from "./Spinner";
 import TodoForm from "./TodoForm";
+import toast from 'react-hot-toast';
+
 
 const Card = () => {
   const [showModal, setShowModal] = useState(false);
@@ -15,7 +17,7 @@ const Card = () => {
 
   useEffect(() => {
     if (isError) {
-      ///console.log(message);
+      toast.error(message);
     }
 
     dispatch(getTodos());
@@ -54,7 +56,7 @@ const Card = () => {
           </span>
         </div>
 
-        {showModal ? <TodoForm setShowModal={setShowModal} /> : null}
+        {showModal && <TodoForm setShowModal={setShowModal} />}
       </div>
     </>
   );

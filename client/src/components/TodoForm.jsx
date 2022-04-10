@@ -26,7 +26,7 @@ const TodoForm = ({ setShowModal }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-10 bg-gray-900 bg-opacity-75">
+    <div className="fixed z-50 inset-0 overflow-y-auto bg-gray-900 bg-opacity-75">
       <div className="flex items-center justify-center min-h-screen px-4">
         <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white shadow-xl">
           <div className="max-w-md mx-auto space-y-6">
