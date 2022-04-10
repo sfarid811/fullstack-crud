@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTodo } from "../features/todoSlice";
+import toast from 'react-hot-toast';
 
 
 const TodoForm = ({ setShowModal }) => {
@@ -12,12 +13,12 @@ const TodoForm = ({ setShowModal }) => {
     e.preventDefault();
 
     if (name.trim().length === 0) {
-      alert("Enter a task before adding !!");
-      setName("");
-      setDescription("");
+      toast.error('Enter a task before adding', {
+        duration: 4000,
+        position: 'top-right',
+      })
       return;
     }
-
     dispatch(createTodo({ name, description }));
     setName("");
     setDescription("");
@@ -25,12 +26,12 @@ const TodoForm = ({ setShowModal }) => {
   };
 
   return (
-    <div className="fixed z-10 inset-0">
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl">
+    <div className="fixed inset-0 z-10 bg-gray-900 bg-opacity-75">
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white shadow-xl">
           <div className="max-w-md mx-auto space-y-6">
             <form onSubmit={handleSubmit}>
-              <h2 className="text-2xl font-bold ">Submit your task</h2>
+              <h2 className="text-2xl font-bold">Submit your task</h2>
               <p className="my-4 opacity-70">
                 Adipisicing elit. Quibusdam magnam sed ipsam deleniti debitis
                 laboriosam praesentium dolorum doloremque beata.
@@ -43,7 +44,7 @@ const TodoForm = ({ setShowModal }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
-                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:border-slate-600 focus:outline-none"
+                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:outline-none"
               />
               <label className="uppercase text-sm font-bold opacity-70">
                 Description
@@ -52,7 +53,9 @@ const TodoForm = ({ setShowModal }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
-                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded"
+                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded
+                border-slate-200 focus:outline-none
+                "
               />
 
               <div className="flex space-x-4">
@@ -71,6 +74,12 @@ const TodoForm = ({ setShowModal }) => {
             </form>
           </div>
         </div>
+        <div className=""
+         onClick={() => setShowModal(false)}
+        >
+
+        </div>
+
       </div>
     </div>
   );

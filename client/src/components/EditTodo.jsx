@@ -16,9 +16,9 @@ const EditTodo = ({ setShowEdit, todo }) => {
   };
 
   return (
-    <div className="fixed z-10 inset-0">
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl">
+    <div className="fixed inset-0 z-10 bg-gray-900 bg-opacity-75">
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white shadow-xl">
           <div className="max-w-md mx-auto space-y-6">
             <form onSubmit={updateForm}>
               <h2 className="text-2xl font-bold ">Submit your task</h2>
@@ -34,7 +34,7 @@ const EditTodo = ({ setShowEdit, todo }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
-                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:border-slate-600 focus:outline-none"
+                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:outline-none"
               />
               <label className="uppercase text-sm font-bold opacity-70">
                 Description
@@ -43,7 +43,9 @@ const EditTodo = ({ setShowEdit, todo }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
-                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded"
+                className="p-3 mt-2 mb-4 w-full bg-slate-200 rounded
+                border-2 border-slate-200 focus:outline-none
+                "
               />
 
               <div className="flex space-x-4">

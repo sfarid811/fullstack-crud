@@ -33,8 +33,7 @@ const Card = () => {
     <>
       <div className="mx-auto container py-20 px-6">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {todos &&
-            todos.map((todo, index) => <CardItem key={index} todo={todo} />)}
+          {todos.length === 0 ? <p className="text-center text-3xl text-slate-700">No tickets yet! Click on the bottom of the page</p>:  todos.map((todo, index) => <CardItem key={index} todo={todo} />)}
         </div>
         <div className="fixed z-30 bottom-6 right-10 bg-gray-700 p-2 rounded-full hover:bg-gray-600 cursor-pointer">
           <span className="text-[#fff]" onClick={() => setShowModal(true)}>
@@ -54,6 +53,7 @@ const Card = () => {
             </svg>
           </span>
         </div>
+
         {showModal ? <TodoForm setShowModal={setShowModal} /> : null}
       </div>
     </>
