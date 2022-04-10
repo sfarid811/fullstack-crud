@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTodos, selectTodo, reset } from "../features/todoSlice";
 import Spinner from "./Spinner";
 import TodoForm from "./TodoForm";
-import toast from 'react-hot-toast';
-
+import toast from "react-hot-toast";
 
 const Card = () => {
   const [showModal, setShowModal] = useState(false);
@@ -35,7 +34,13 @@ const Card = () => {
     <>
       <div className="mx-auto container py-20 px-6">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {todos.length === 0 ? <p className="text-center text-3xl text-slate-700">No tickets yet! Click on the bottom of the page</p>:  todos.map((todo, index) => <CardItem key={index} todo={todo} />)}
+          {todos && todos.length > 0 ? (
+            todos.map((todo, index) => <CardItem key={index} todo={todo} />)
+          ) : (
+            <p className="text-center text-3xl text-slate-700">
+              No tickets yet! Click on the bottom of the page
+            </p>
+          )}
         </div>
         <div className="fixed z-30 bottom-6 right-10 bg-gray-700 p-2 rounded-full hover:bg-gray-600 cursor-pointer">
           <span className="text-[#fff]" onClick={() => setShowModal(true)}>
