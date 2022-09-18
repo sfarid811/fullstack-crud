@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { deleteTodo } from "../features/todoSlice";
 import { useDispatch } from "react-redux";
 import EditTodo from "./EditTodo";
-import { formatTime } from "../utils";
+import { formatTime, getFirstUpperCaseTodo } from "../utils";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const CardItem = ({ todo }) => {
   const [showEdit, setShowEdit] = useState(false);
@@ -14,7 +15,7 @@ const CardItem = ({ todo }) => {
         <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4">
           <div>
             <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">
-              {todo.name.charAt(0).toUpperCase() + todo.name.slice(1)}
+              {getFirstUpperCaseTodo(todo.name)}
             </h4>
             <p className="text-gray-800 dark:text-gray-100 text-sm">
               {todo.description}
@@ -52,8 +53,9 @@ const CardItem = ({ todo }) => {
                   onClick={() => dispatch(deleteTodo(todo._id))}
                   className="w-8 h-8 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-black"
                 >
-                  X
+                <ClearIcon ></ClearIcon>
                 </button>
+                
               </div>
             </div>
           </div>
